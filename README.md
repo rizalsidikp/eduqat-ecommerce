@@ -57,7 +57,26 @@ Which should result in response similar to the following (removed `input` conten
 }
 ```
 
+### Local development requirements
+NodeJS Version: 16
+
+### Local development unit test
+If you want to running unit test, use this command:
+```bash
+npm run test
+```
+
+You can run test with coverage report using:
+```bash
+npm run test:coverage
+```
+
+The report can be find at : ```coverage/lcov-report/index.html```
 ### Local development
+If you want to running locally, don't forget to install all library needed using following command:
+```bash
+npm install
+```
 
 You can invoke your function locally by using the following command:
 
