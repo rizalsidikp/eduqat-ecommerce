@@ -1,0 +1,28 @@
+enrollments-list:
+  handler: modules/enrollments/endpoints/read.list
+  events:
+    - http:
+        path: enrollments
+        method: GET
+        cors: true
+enrollments-get:
+  handler: modules/enrollments/endpoints/read.get
+  events:
+    - http:
+        path: enrollments/{id}
+        method: GET
+        cors: true
+enrollments-create:
+  handler: modules/enrollments/endpoints/create.create
+  events:
+    - http:
+        path: enrollments
+        method: POST
+        cors: true
+enrollments-delete:
+  handler: modules/enrollments/endpoints/delete.delete
+  events:
+    - http:
+        path: enrollments/{id}
+        method: DELETE
+        cors: true
