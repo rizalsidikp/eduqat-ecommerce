@@ -1,0 +1,67 @@
+org: rizalsidikp
+app: e-commerce
+service: e-commerce
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  iam:
+    role:
+      statements:
+        - Effect: 'Allow'
+          Action:
+            - 'dynamodb:PutItem'
+            - 'dynamodb:Get*'
+            - 'dynamodb:Scan*'
+            - 'dynamodb:UpdateItem'
+            - 'dynamodb:DeleteItem'
+          Resource: 
+            - arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${sls:stage}-${self:service}-users
+            - arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${sls:stage}-${self:service}-courses
+            - arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${sls:stage}-${self:service}-enrollments
+  environment: 
+    DYNAMODB_USER_TABLE: ${sls:stage}-${self:service}-users
+    DYNAMODB_COURSE_TABLE: ${sls:stage}-${self:service}-courses
+    DYNAMODB_ENROLLMENT_TABLE: ${sls:stage}-${self:service}-enrollments
+
+functions: ${file(serverless-dynamic.js)}
+
+resources:
+  Resources:
+    UserTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: ID
+            AttributeType: S
+        BillingMode: PAY_PER_REQUEST
+        KeySchema:
+          - AttributeName: ID
+            KeyType: HASH
+        TableName: ${sls:stage}-${self:service}-users
+    CourseTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: ID
+            AttributeType: S
+        BillingMode: PAY_PER_REQUEST
+        KeySchema:
+          - AttributeName: ID
+            KeyType: HASH
+        TableName: ${sls:stage}-${self:service}-courses
+    EnrollmentTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: ID
+            AttributeType: S
+        BillingMode: PAY_PER_REQUEST
+        KeySchema:
+          - AttributeName: ID
+            KeyType: HASH
+        TableName: ${sls:stage}-${self:service}-enrollments
+
+plugins:
+  - serverless-offline

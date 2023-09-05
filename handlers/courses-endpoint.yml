@@ -1,0 +1,35 @@
+courses-list:
+  handler: modules/courses/endpoints/read.list
+  events:
+    - http:
+        path: courses
+        method: GET
+        cors: true
+courses-get:
+  handler: modules/courses/endpoints/read.get
+  events:
+    - http:
+        path: courses/{id}
+        method: GET
+        cors: true
+courses-create:
+  handler: modules/courses/endpoints/create.create
+  events:
+    - http:
+        path: courses
+        method: POST
+        cors: true
+courses-update:
+  handler: modules/courses/endpoints/update.update
+  events:
+    - http:
+        path: courses/{id}
+        method: PUT
+        cors: true
+courses-delete:
+  handler: modules/courses/endpoints/delete.delete
+  events:
+    - http:
+        path: courses/{id}
+        method: DELETE
+        cors: true

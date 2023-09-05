@@ -1,0 +1,35 @@
+users-list:
+  handler: modules/users/endpoints/read.list
+  events:
+    - http:
+        path: users
+        method: GET
+        cors: true
+users-get:
+  handler: modules/users/endpoints/read.get
+  events:
+    - http:
+        path: users/{id}
+        method: GET
+        cors: true
+users-create:
+  handler: modules/users/endpoints/create.create
+  events:
+    - http:
+        path: users
+        method: POST
+        cors: true
+users-update:
+  handler: modules/users/endpoints/update.update
+  events:
+    - http:
+        path: users/{id}
+        method: PUT
+        cors: true
+users-delete:
+  handler: modules/users/endpoints/delete.delete
+  events:
+    - http:
+        path: users/{id}
+        method: DELETE
+        cors: true
